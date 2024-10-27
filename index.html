@@ -38,12 +38,10 @@
 <body style="color: #333; font-family: 'Ubuntu', sans-serif;">
 
     <div class="container-fluid d-flex" style="height: 100vh;">
-        <!-- Left Panel for Activity Cards -->
         <div class="leftPanel" style="width: 30%; padding: 20px; background-color: #fff;">
             <h1 style="font-family: 'Montserrat', sans-serif; color: #BA3B46;">SAM Activities</h1>
             <p>This page showcases the activities for Systems Administration and Maintenance.</p>
 
-            <!-- Link for Activity 2 -->
             <a href="https://mariari-chickennuggets.github.io/sahara-bootstrap-site/" target="_blank"
                 class="text-white">
                 <div class="activityCard text-white p-3 mb-4" data-img="sahara_act2.png">
@@ -54,8 +52,7 @@
                 </div>
             </a>
 
-            <!-- Placeholder links for Activity 3 and 4 -->
-            <a href="#" class="text-white">
+            <a href="https://mariari-chickennuggets.github.io/SAM-activities/" class="text-white">
                 <div class="activityCard text-white p-3 mb-4"
                     data-img="https://media.giphy.com/media/lJNoBCvQYp7nq/giphy.gif">
                     <div class="cardBody">
@@ -76,7 +73,6 @@
             </a>
         </div>
 
-        <!-- Right Panel for Hovered Image -->
         <div class="rightPanel d-flex align-items-center justify-content-center"
             style="width: 70%; background-color: #fff; padding: 20px;">
             <img id="hoveredImage" class="hoveredImage" src="" alt="Activity Image">
@@ -84,14 +80,10 @@
     </div>
 
     <script>
-        // Select all activity cards and the image element
         const activityCards = document.querySelectorAll('.activityCard');
         const hoveredImage = document.getElementById('hoveredImage');
-
-        // Add hover event listeners to each activity card
         activityCards.forEach(card => {
             card.addEventListener('mouseenter', function () {
-                // Get the image source from the data-img attribute
                 const imgSrc = card.getAttribute('data-img');
                 hoveredImage.src = imgSrc;
                 hoveredImage.classList.add('show');
