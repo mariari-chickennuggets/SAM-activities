@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Memes - MemeMO</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<style>
+    body {
+        background-image: linear-gradient(to left top, #79f2bb, #aee191, #d3ce7b, #ebb97b, #f4a78b, #f39e92, #ee969a, #e690a3, #e58a9f, #e4849b, #e27e98, #e17894);
+        font-family: 'Josefin Sans', sans-serif;
+        margin: 0;
+    }
+
+    h1 {
+        color: #030303;
+        font-family: 'Indie Flower', cursive;
+        text-align: center;
+        margin: 20px 0;
+        font-size: 3em;
+    }
+
+    .searchBarContainer {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .searchBar {
+        width: 80%;
+        max-width: 500px;
+        padding: 10px;
+        font-size: 1.2em;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .memeGallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        justify-content: center;
+    }
+
+    .card {
+        background-color: #EEEEEE;
+        flex: 1 1 200px;
+        max-width: 300px;
+        margin-bottom: 5px;
+        transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    .cardImgTop {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .cardBody {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .cardTitle {
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+
+    .back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-image: linear-gradient(to left top, #79f2bb, #aee191, #d3ce7b, #ebb97b, #f4a78b);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 10px 20px;
+        font-size: 1em;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        display: none;
+        /* Initially hidden */
+        z-index: 1000;
+    }
+
+    .back-to-top:hover {
+        background-image: linear-gradient(to left top, #f4a78b, #ebb97b, #d3ce7b, #aee191, #79f2bb);
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1><a href="index.html" style="text-decoration: none; color: inherit;">MemeMO</a></h1>
+        <div class="searchBarContainer">
+            <input type="text" id="searchBar" placeholder="Enter keyword..." class="form-control"
+                style="border-radius: 50px; padding: 10px 20px; font-size: 1.2em; width: 80%; max-width: 500px; border: 2px solid #ccc; margin-bottom: 1px;">
+        </div>
+        <div class="memeGallery" id="memeGallery"></div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="btn back-to-top" id="backToTopButton">Back to Top</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchBar = document.getElementById('searchBar');
+            const memeGallery = document.getElementById('memeGallery');
+            const backToTopButton = document.getElementById('backToTopButton');
+
+            function fetchAllMemes() {
+                fetch(`https://api.imgflip.com/get_memes`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const memes = data.data.memes;
+                        displayMemes(memes);
+                    })
+                    .catch(error => console.error('Error fetching all memes:', error));
+            }
+
+            function displayMemes(memes) {
+                memeGallery.innerHTML = '';
+                memes.forEach(meme => {
+                    const col = document.createElement('div');
+                    col.className = 'card';
+                    col.innerHTML = `
+                        <a href="view.html?meme=${encodeURIComponent(meme.url)}&title=${encodeURIComponent(meme.name)}">
+                            <img src="${meme.url}" class="cardImgTop" alt="${meme.name}">
+                            <div class="cardBody">
+                                <h5 class="cardTitle">${meme.name}</h5>
+                            </div>
+                        </a>
+                    `;
+                    memeGallery.appendChild(col);
+                });
+            }
+
+            function searchMemes(query) {
+                if (query.trim() === '') {
+                    fetchAllMemes();
+                    return;
+                }
+
+                fetch(`https://api.imgflip.com/get_memes`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const memes = data.data.memes;
+                        const filteredMemes = memes.filter(meme => meme.name.toLowerCase().includes(query.toLowerCase()));
+                        displayMemes(filteredMemes);
+
+                        if (filteredMemes.length === 0) {
+                            memeGallery.innerHTML = '<p class="text-center">No memes found for this keyword.</p>';
+                        }
+                    })
+                    .catch(error => console.error('Error fetching memes:', error));
+            }
+
+            searchBar.addEventListener('keyup', (event) => {
+                if (event.key === 'Enter') {
+                    const query = searchBar.value.trim();
+                    searchMemes(query);
+                }
+            });
+
+            fetchAllMemes(); // Load all memes initially
+
+            // Scroll Event for Back to Top Button
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTopButton.style.display = 'block';
+                } else {
+                    backToTopButton.style.display = 'none';
+                }
+            });
+
+            // Click Event for Back to Top Button
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+
+</html>
