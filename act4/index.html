@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Search</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<style>
+    body {
+        background-image: linear-gradient(to left top, #79f2bb, #aee191, #d3ce7b, #ebb97b, #f4a78b, #f39e92, #ee969a, #e690a3, #e58a9f, #e4849b, #e27e98, #e17894);
+        font-family: 'Josefin Sans', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .container {
+        text-align: center;
+        width: 100%;
+        max-width: 800px;
+    }
+
+    .searchContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .searchContainer input {
+        width: 80%;
+        max-width: 500px;
+        padding: 10px;
+        font-size: 1.2em;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .exampleKeywords {
+        margin-top: 20px;
+        font-size: 1.1em;
+    }
+
+    .exampleKeywords span {
+        font-weight: bold;
+        color: #007bff;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+    .exampleKeywords span:hover {
+        text-decoration: underline;
+    }
+
+    .row {
+        justify-content: center;
+    }
+
+    .card {
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.2s;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    .cardImgTop {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .cardBody {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        text-align: center;
+        padding: 10px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .card:hover .cardBody {
+        opacity: 1;
+    }
+
+    .cardTitle {
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+
+    h1 {
+        font-family: 'Indie Flower', cursive;
+        font-size: 3em;
+        margin-bottom: 20px;
+        color: #010f09;
+    }
+
+    .allMemesBtn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 1.2em;
+        background-color: #e17894;
+        color: white;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+    }
+
+    .allMemesBtn:hover {
+        background-color: #dd4b72;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="searchContainer">
+            <h1><a href="index.html" style="text-decoration: none; color: inherit;">MemeMO</a></h1>
+            <input type="text" id="searchBar" placeholder="Enter keyword..." class="form-control"
+                style="border-radius: 50px; padding: 10px 20px; font-size: 1.2em; width: 80%; max-width: 500px; border: 2px solid #ccc; margin-bottom: 1px;">
+            <div class="exampleKeywords">
+                <p>Example keywords to search for:</p>
+                <span class="keyword" style="color:#961b3c" data-keyword="cat">Cat</span>
+                <span class="keyword" style="color:#972344" data-keyword="dog">Dog</span>
+                <span class="keyword" style="color:#b4284b" data-keyword="meme">Meme</span>
+            </div>
+            <button class="allMemesBtn" id="allMemesBtn" onclick="window.location.href='allMemes.html';">View All
+                Memes</button>
+        </div>
+        <div class="row mt-4" id="memeGallery"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchBar = document.getElementById('searchBar');
+            const memeGallery = document.getElementById('memeGallery');
+            const exampleKeywords = document.querySelectorAll('.keyword');
+            const allMemesBtn = document.getElementById('allMemesBtn');
+
+            function searchMemes(query) {
+                memeGallery.innerHTML = '';
+                if (query.trim() === '') return;
+
+                fetch(`https://api.imgflip.com/get_memes`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const memes = data.data.memes;
+                        const filteredMemes = memes.filter(meme => meme.name.toLowerCase().includes(query.toLowerCase()));
+
+                        filteredMemes.forEach(meme => {
+                            const col = document.createElement('div');
+                            col.className = 'col-md-3 mb-4';
+                            col.innerHTML = `
+                                <div class="card">
+                                    <a href="view.html?meme=${encodeURIComponent(meme.url)}&title=${encodeURIComponent(meme.name)}">
+                                        <img src="${meme.url}" class="cardImgTop" alt="${meme.name}">
+                                        <div class="cardBody">
+                                            <h5 class="cardTitle">${meme.name}</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                            `;
+                            memeGallery.appendChild(col);
+                        });
+
+                        if (filteredMemes.length === 0) {
+                            memeGallery.innerHTML = '<p class="text-center">No memes found for this keyword.</p>';
+                        }
+                    })
+                    .catch(error => console.error('Error fetching memes:', error));
+            }
+
+            function showAllMemes() {
+                memeGallery.innerHTML = '';
+
+                fetch(`https://api.imgflip.com/get_memes`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const memes = data.data.memes;
+
+                        memes.forEach(meme => {
+                            const col = document.createElement('div');
+                            col.className = 'col-md-3 mb-4';
+                            col.innerHTML = `
+                                <div class="card">
+                                    <a href="view.html?meme=${encodeURIComponent(meme.url)}&title=${encodeURIComponent(meme.name)}">
+                                        <img src="${meme.url}" class="cardImgTop" alt="${meme.name}">
+                                        <div class="cardBody">
+                                            <h5 class="cardTitle">${meme.name}</h5>
+                                        </div>
+                                    </a>
+                                </div>
+                            `;
+                            memeGallery.appendChild(col);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching all memes:', error));
+            }
+
+            searchBar.addEventListener('keyup', (event) => {
+                if (event.key === 'Enter') {
+                    const query = searchBar.value.trim();
+                    searchMemes(query);
+                }
+            });
+
+            exampleKeywords.forEach(keyword => {
+                keyword.addEventListener('click', () => {
+                    const keywordText = keyword.getAttribute('data-keyword');
+                    searchBar.value = keywordText;
+                    searchMemes(keywordText);
+                });
+            });
+
+            allMemesBtn.addEventListener('click', showAllMemes);
+        });
+    </script>
+</body>
+
+</html>
