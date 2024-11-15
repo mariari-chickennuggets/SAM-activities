@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Meme View</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<style>
+    body {
+        background-image: linear-gradient(to left top, #79f2bb, #aee191, #d3ce7b, #ebb97b, #f4a78b, #f39e92, #ee969a, #e690a3, #e58a9f, #e4849b, #e27e98, #e17894);
+        font-family: 'Josefin Sans', sans-serif;
+
+    }
+</style>
+
+<body>
+    <div class="container mt-5 text-center">
+        <div class="mt-4">
+            <h3 id="meme-title"></h3> <!-- Placeholder for meme title -->
+            <img id="full-meme" src="" alt="Full Meme" class="img-fluid mt-3">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const memeUrl = urlParams.get('meme');
+            const memeTitle = urlParams.get('title');  // Get meme title
+
+            // Display the meme title and image if they exist
+            if (memeUrl && memeTitle) {
+                const imgElement = document.getElementById('full-meme');
+                const titleElement = document.getElementById('meme-title');
+
+                imgElement.src = memeUrl;  // Set the full-size meme image
+                titleElement.textContent = memeTitle;  // Set the meme title
+            } else {
+                document.body.innerHTML = '<p class="text-center">No meme found.</p>';
+            }
+        });
+    </script>
+</body>
+
+</html>
