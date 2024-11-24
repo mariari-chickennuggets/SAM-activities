@@ -33,6 +33,47 @@
         min-height: 100vh;
       }
 
+      #spotify-toggle {
+        position: fixed;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #1db954;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        z-index: 1000;
+      }
+
+      #spotify-card {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        transform: translateY(100%);
+        opacity: 0;
+        z-index: 1000;
+      }
+
+      #spotify-card iframe {
+        display: block;
+      }
+
+      #spotify-card.visible {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .hidden {
+        display: none;
+      }
+
       .navbar {
         background-color: #133e87;
       }
@@ -146,6 +187,21 @@
   </head>
 
   <body>
+    <button id="spotify-toggle">Come chill</button>
+
+    <div id="spotify-card" class="hidden">
+      <iframe
+        style="border-radius: 12px"
+        src="https://open.spotify.com/embed/playlist/3Ht6Z4tikC8oHfWeCSrtIQ?utm_source=generator"
+        width="100%"
+        height="352"
+        frameborder="0"
+        allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+      ></iframe>
+    </div>
+
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container-fluid">
         <a class="navbar-brand navbar-brand-custom" href="#">
@@ -300,72 +356,6 @@
       </div>
     </div>
 
-    <div class="container my-5">
-      <h3 class="text-center mb-4">
-        Listen to some playlists while you're here
-      </h3>
-      <div class="row">
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title text-center">Would you be so kind</h5>
-              <div class="embed-responsive embed-responsive-16by9">
-                <iframe
-                  style="border-radius: 12px"
-                  src="https://open.spotify.com/embed/playlist/6Sm72cDJgXJQnWuO64fogH?utm_source=generator"
-                  width="100%"
-                  height="352"
-                  frameborder="0"
-                  allowfullscreen=""
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  loading="lazy"
-                >
-                </iframe>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title text-center">Alien stage</h5>
-              <div class="embed-responsive embed-responsive-16by9">
-                <iframe
-                  style="border-radius: 12px"
-                  src="https://open.spotify.com/embed/playlist/3Ht6Z4tikC8oHfWeCSrtIQ?utm_source=generator"
-                  width="100%"
-                  height="352"
-                  frameborder="0"
-                  allowfullscreen=""
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  loading="lazy"
-                ></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title text-center">Hamilton</h5>
-              <div class="embed-responsive embed-responsive-16by9">
-                <iframe
-                  style="border-radius: 12px"
-                  src="https://open.spotify.com/embed/playlist/5HUoUACNeMyxZZZNovsTNI?utm_source=generator"
-                  width="100%"
-                  height="352"
-                  frameborder="0"
-                  allowfullscreen=""
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  loading="lazy"
-                ></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <footer
       class="footer"
       style="
@@ -406,6 +396,30 @@
       </div>
     </footer>
 
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s"
+    ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const spotifyToggle = document.getElementById("spotify-toggle");
+        const spotifyCard = document.getElementById("spotify-card");
+
+        spotifyToggle.addEventListener("click", () => {
+          if (spotifyCard.classList.contains("visible")) {
+            spotifyCard.classList.remove("visible");
+            setTimeout(() => {
+              spotifyCard.classList.add("hidden");
+            }, 300);
+          } else {
+            spotifyCard.classList.remove("hidden");
+            setTimeout(() => {
+              spotifyCard.classList.add("visible");
+            }, 10);
+          }
+        });
+      });
+    </script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s"
