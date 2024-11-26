@@ -4,40 +4,79 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kurzgesagt</title>
+    <link rel="icon" href="iconnugget.png" type="image/x-icon" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
     <link
-      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+
     <style>
       body {
-        font-family: "Sans-serif", Arial, sans-serif;
+        font-family: "Roboto", sans-serif;
         background-color: #0d1b2a;
         color: white;
       }
+
+      h1,
+      h2,
+      .navbar-brand {
+        font-family: "Montserrat", sans-serif;
+      }
+
       .navbar {
         background-color: #284b63;
       }
-      .video-title {
+
+      .videoTitle {
         color: #ffd700;
       }
+
       footer {
-        background-color: #1b263b;
-        padding: 20px;
-        text-align: center;
-        color: #f0f0f0;
+        line-height: 1.8;
       }
-      .animate-on-scroll {
+
+      footer h5 {
+        font-size: 1.25rem;
+      }
+
+      footer a {
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+      .animateOnScroll {
         opacity: 0;
         transform: translateY(50px);
         transition: opacity 1s ease-out, transform 1s ease-out;
       }
-      .animate-on-scroll.visible {
+
+      .animateOnScroll.visible {
         opacity: 1;
         transform: translateY(0);
+      }
+
+      .vidContainer {
+        width: 90vw;
+        height: 80vh;
+        max-width: 1920px;
+      }
+
+      .carousel-item iframe {
+        border-radius: 5px;
       }
     </style>
   </head>
@@ -66,13 +105,15 @@
       </div>
     </nav>
 
-    <header class="text-center p-5">
+    <header
+      class="d-flex flex-column justify-content-center align-items-center text-center vh-100 p-5"
+    >
       <h1 class="display-4 animate__animated animate__fadeInDown">
         Kurzgesagt – In a Nutshell
       </h1>
       <p class="lead animate__animated animate__fadeInUp">
-        Animation videos explaining things with optimistic nihilism since
-        12,013.
+        Explore thought-provoking topics about science, the universe, and
+        humanity.
       </p>
       <a
         href="#videos"
@@ -81,20 +122,155 @@
       >
     </header>
 
+    <div
+      class="vidContainer container-fluid my-5 d-flex justify-content-center"
+    >
+      <iframe
+        class="w-100 h-100"
+        src="https://www.youtube.com/embed/h6fcK_fRYaI?si=O3Mp1Dc2j0kwh2AD"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </div>
+    <div class="text-center mt-3">
+      <h1>The Egg - A Short Story</h1>
+      <p>
+        <strong>Chef:</strong> How do you like your eggs? <br />
+        <strong>Me:</strong> <i>Existential</i>
+      </p>
+    </div>
+
     <section id="videos" class="container my-5">
-      <h2 class="text-center mb-4 animate__animated animate__slideInUp"> Kurzgesagt Channel Trailer </h2>
+      <h2 class="text-center mb-4 animate__animated animate__slideInUp">
+        Personal Favorites
+      </h2>
       <div class="row">
-        <div class="col-md-4 animate-on-scroll">
+        <div class="col-md-4 animateOnScroll">
           <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/_27eD49ePQE?si=oAaPu77ZOArzCinx"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen>
-          </iframe>
+            width="100%"
+            height="200"
+            src="https://www.youtube.com/embed/bgo7rm5Maqg"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
+          <h3 class="videoTitle">We Fell For The Oldest Lie On The Internet</h3>
+          <p>
+            "In a nutshell, this is a video about accountability and commitment
+            to truth." - Lucas
+          </p>
+        </div>
+        <div class="col-md-4 animateOnScroll">
+          <iframe
+            width="100%"
+            height="200"
+            src="https://www.youtube.com/embed/W93XyXHI8Nw"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
+          <h3 class="videoTitle">Is Civilization on the Brink of Collapse?</h3>
+          <p>
+            "Humanity is like a teenager speeding around blind corners." -
+            Kurzgesagt
+          </p>
+        </div>
+        <div class="col-md-4 animateOnScroll">
+          <iframe
+            width="100%"
+            height="200"
+            src="https://www.youtube.com/embed/h6fcK_fRYaI"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
+          <h3 class="videoTitle">The Egg - A Short Story</h3>
+          <p>
+            "I can't believe I watched this 31 million times."
+            -georgioskanderbeg
+          </p>
+        </div>
+        <div class="col-md-4 animateOnScroll">
+          <iframe
+            width="100%"
+            height="200"
+            src="https://www.youtube.com/embed/V4Z8EdiJxgk"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
+          <h3 class="videoTitle">
+            The Black Hole That Kills Galaxies - Quasars
+          </h3>
+          <p>
+            "Learning about space feels like the equivalent of gaining awareness
+            of the world around you as a kid"-osheridan
+          </p>
+        </div>
+        <div class="col-md-4 animateOnScroll">
+          <iframe
+            width="100%"
+            height="200"
+            src="https://www.youtube.com/embed/LBudghsdByQ"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
+          <h3 class="videoTitle">Why Humans Are Vanishing</h3>
+          <p>
+            "“It takes a village to raise a child” is a very old saying. People
+            are very quick to forget." -Squintis
+          </p>
+        </div>
+        <div class="col-md-4 animateOnScroll">
+          <iframe
+            width="100%"
+            height="200"
+            src="https://www.youtube.com/embed/HR2C_7G_yRQ"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
+          <h3 class="videoTitle">How To Destroy The Universe</h3>
+          <p>"This video is sponsored by Thanos." -Dimaz42</p>
+        </div>
+        <div class="col-md-4 animateOnScroll">
+          <iframe
+            width="100%"
+            height="200"
+            src="https://www.youtube.com/embed/UebSfjmQNvs"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
+          <h3 class="videoTitle">Do You Have a Free Will?</h3>
+          <p>"If i am NPC, the programmer was joking." -paulojabez</p>
+        </div>
+        <div class="col-md-4 animateOnScroll">
+          <iframe
+            width="100%"
+            height="200"
+            src="https://www.youtube.com/embed/LrIRuqr_Ozg"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
+          <h3 class="videoTitle">What Happens AFTER Nuclear War?</h3>
+          <p>
+            "If you have more people than calories available, then in a few
+            weeks you don't anymore." -Kurzgesagt
+          </p>
+        </div>
+        <div class="col-md-4 animateOnScroll">
+          <iframe
+            width="100%"
+            height="200"
+            src="https://www.youtube.com/embed/wwSzpaTHyS8"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
+          <h3 class="videoTitle">
+            Did The Future Already Happen? - The Paradox of Time
+          </h3>
+          <p>
+            "Me missing the bus was already predetermined since the big bang"
+            -Kurzgesagt
+          </p>
         </div>
       </div>
     </section>
@@ -124,100 +300,168 @@
       </div>
     </section>
 
+    <footer class="bg-dark text-white py-5">
+      <div class="container">
+        <div class="mb-4">
+          <h5>About Us</h5>
+          <p>
+            We’re a team of illustrators, animators, number crunchers, and one
+            dog who aim to spark curiosity about science and the world we live
+            in. To us, nothing is boring if you tell a good story.
+          </p>
+          <p>
+            For updates on our videos and other news from the Kurzgesagt
+            universe, follow us:
+          </p>
+          <div>
+            <a
+              href="https://twitter.com/Kurzgesagt"
+              target="_blank"
+              class="text-warning me-3"
+            >
+              <i class="fab fa-twitter fa-lg"></i>
+            </a>
+            <a
+              href="https://facebook.com/Kurzgesagt"
+              target="_blank"
+              class="text-warning me-3"
+            >
+              <i class="fab fa-facebook fa-lg"></i>
+            </a>
+            <a
+              href="https://instagram.com/Kurzgesagt"
+              target="_blank"
+              class="text-warning me-3"
+            >
+              <i class="fab fa-instagram fa-lg"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/company/kurzgesagt"
+              target="_blank"
+              class="text-warning"
+            >
+              <i class="fab fa-linkedin fa-lg"></i>
+            </a>
+          </div>
+        </div>
+        <hr class="bg-light" />
+        <div class="mb-4">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled d-flex flex-wrap gap-4">
+            <li>
+              <a
+                href="https://shop.kgs.link/cool"
+                target="_blank"
+                class="text-warning"
+                >Shop</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://patreon.com/Kurzgesagt"
+                target="_blank"
+                class="text-warning"
+                >Patreon</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://tiktok.com/@kurz_gesagt"
+                target="_blank"
+                class="text-warning"
+                >TikTok</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://shop.kgs.link/pages/newsletter-fans"
+                target="_blank"
+                class="text-warning"
+                >Newsletter</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://reddit.com/r/kurzgesagt"
+                target="_blank"
+                class="text-warning"
+                >Reddit</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://kurzgesagt.org/imprint"
+                target="_blank"
+                class="text-warning"
+                >Imprint</a
+              >
+            </li>
+          </ul>
+        </div>
+        <hr class="bg-light" />
+        <div class="text-center">
+          <p class="mb-0">
+            &copy; 2024 Kurzgesagt Fanpage. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
     <script>
       const playlists = [
         {
-          title: "1",
-          description: "",
-          img: "",
-          link: "",
+          title: "What if...",
+          link: "https://www.youtube.com/embed/videoseries?list=PLFs4vir_WsTygaVbFuJquGLnjwc9Jmdz8",
         },
         {
-          title: "2",
-          description: "",
-          img: "",
-          link: "",
+          title: "Nuclear",
+          link: "https://www.youtube.com/embed/playlist?list=PLFs4vir_WsTxlR7cF1rv7Y1wdyde0lD10",
         },
         {
-          title: "3",
-          description: "",
-          img: "",
-          link: "",
+          title: "Dinosaurs",
+          link: "https://www.youtube.com/embed/playlist?list=PLFs4vir_WsTzPHPJufbDcb-FzQ1__DVU_",
         },
         {
-          title: "4",
-          description: "",
-          img: "",
-          link: "",
+          title: "Immune System",
+          link: "https://www.youtube.com/embed/playlist?list=PLFs4vir_WsTyS2cy4vj4obl5igqCOV749",
         },
         {
-          title: "5",
-          description: "",
-          img: "",
-          link: "",
+          title: "Climate Change",
+          link: "https://www.youtube.com/embed/playlist?list=PLFs4vir_WsTyRF0gggqGopQvUZR-oK_c6",
         },
         {
-          title: "6",
-          description: "",
-          img: "",
-          link: "",
+          title: "Black Holes",
+          link: "https://www.youtube.com/embed/playlist?list=PLFs4vir_WsTwKi93uWnfp4xdVuu4M-OdN",
         },
         {
-          title: "7",
-          description: "",
-          img: "",
-          link: "",
+          title: "The Existential Crisis Playlist",
+          link: "https://www.youtube.com/embed/playlist?list=PLFs4vir_WsTxontcYm5ctqp89cNBJKNrs",
         },
         {
-          title: "8",
-          description: "",
-          img: "",
-          link: "",
+          title: "Human Stuff",
+          link: "https://www.youtube.com/embed/playlist?list=PLFs4vir_WsTySi9F8v5pvCi6zQj7Cwneu",
         },
         {
-          title: "9",
-          description: "",
-          img: "",
-          link: "",
+          title: "Medicine & Biology",
+          link: "https://www.youtube.com/embed/playlist?list=PLFs4vir_WsTyY31efyHdmtp9l7DpR0Wvi",
         },
         {
-          title: "10",
-          description: "",
-          img: "",
-          link: "",
+          title: "Our Best Stuff",
+          link: "https://www.youtube.com/embed/playlist?list=PLFs4vir_WsTzcfD7ZE8uO3yX-GCKUk9xZ",
         },
         {
-          title: "11",
-          description: "",
-          img: "",
-          link: "",
+          title: "Futurism",
+          link: "https://www.youtube.com/embed/playlist?list=PLFs4vir_WsTysVwsTy7hVL89W2MdQtU_k",
         },
         {
-          title: "12",
-          description: "",
-          img: "",
-          link: "",
+          title: "The Universe and Space stuff",
+          link: "https://www.youtube.com/embed/playlist?list=PLFs4vir_WsTwEd-nJgVJCZPNL3HALHHpF",
         },
         {
-          title: "13",
-          description: "",
-          img: "",
-          link: "",
-        },
-        {
-          title: "14",
-          description: "",
-          img: "",
-          link: "",
-        },
-        {
-          title: "15",
-          description: "",
-          img: "",
-          link: "",
+          title: "Science and other stuff explained",
+          link: "https://www.youtube.com/embed/playlist?list=PLFs4vir_WsTyXrrpFstD64Qj95vpy-yo1",
         },
       ];
-
       const carouselContent = document.getElementById("carouselContent");
       const itemsPerSlide = 3;
       let carouselHTML = "";
@@ -232,17 +476,23 @@
         }
 
         carouselHTML += `
-        <div class="col-md-4">
-          <div class="card bg-dark text-white">
-            <img src="${playlist.img}" class="card-img-top" alt="${playlist.title} Thumbnail">
-            <div class="card-body">
-              <h5 class="card-title">${playlist.title}</h5>
-              <p class="card-text">${playlist.description}</p>
-              <a href="${playlist.link}" class="btn btn-warning btn-sm">Watch Now</a>
+            <div class="col-md-4">
+                <div class="card bg-dark text-white">
+                    <div class="ratio ratio-16x9">
+                        <iframe 
+                        src="${playlist.link}" 
+                        title="${playlist.title}" 
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        ></iframe>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">${playlist.title}</h5>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      `;
+        `;
 
         if (
           (index + 1) % itemsPerSlide === 0 ||
@@ -255,13 +505,9 @@
       carouselContent.innerHTML = carouselHTML;
     </script>
 
-    <footer>
-      <p>Designed with admiration for Kurzgesagt – In a Nutshell.</p>
-    </footer>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      const elements = document.querySelectorAll(".animate-on-scroll");
+      const elements = document.querySelectorAll(".animateOnScroll");
 
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
